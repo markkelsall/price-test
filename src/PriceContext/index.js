@@ -16,7 +16,7 @@ export class PriceProvider extends React.Component {
   }
 
   addExtra = extra => {
-
+    console.log(extra);
   }
 
   state = {
@@ -25,8 +25,6 @@ export class PriceProvider extends React.Component {
     setCar: this.setCar,
     addExtra: this.addExtra,
   };
-
-
 
   render() {
     return (
