@@ -8,15 +8,19 @@ const TotalPrice = ({carPrice, currencyDisplay, fees, extras}) => {
     });
 
     let payNowExtras = 0;
+    let payLocalExtras = 0;
     extras && extras.forEach(extra => {
         if (extra.payNow) {
             payNowExtras += parseInt(extra.amount) * extra.quantity;
+        } else {
+            payLocalExtras += parseInt(extra.amount) * extra.quantity;
         }
     });
     const totalPrice = carPrice + feesTotal + payNowExtras;
     return (
         <div>
-            {currencyDisplay}{totalPrice}
+            <span>Total Price:{currencyDisplay}{totalPrice}</span><br />
+            {payLocalExtras !== 0 && <span>Pay at desk:{currencyDisplay} {payLocalExtras}</span>}
         </div>
     );
 };
