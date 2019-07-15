@@ -1,30 +1,46 @@
 import React, { createContext } from 'react';
 
 const PriceContext = createContext({
-  car: {},
-  setCar: () => {},
   addExtra: () => {}
 });
 
-export class PriceProvider extends React.Component {
-  setCar = carName => {
-    this.setState({
-      car: {
-        name: carName
+class PriceProvider extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      extras: [],
+      carPrice: props.carPrice,
+      currencyDisplay: props.currencyDisplay,
+      fees: props.fees,
+      setCar: this.setCar,
+      addExtra: this.addExtra,
+    };
+  }
+
+  addExtra = (id, amount, payNow) => {
+    const { extras } = this.state;
+    let updatedQuantity = false;
+    extras.forEach(extra => {
+      if (extra.id === id) {
+        updatedQuantity = true;
+        extra.quantity++;
       }
     });
-  }
+    if (!updatedQuantity) {
+      extras.push({
+        id,
+        amount,
+        quantity: 1,
+        payNow
+      });
+    }
 
-  addExtra = extra => {
-    console.log(extra);
+    this.setState(prevState => ({
+      ...prevState,
+      extras
+    }));
   }
-
-  state = {
-    extras: null,
-    car: {},
-    setCar: this.setCar,
-    addExtra: this.addExtra,
-  };
 
   render() {
     return (
@@ -35,4 +51,9 @@ export class PriceProvider extends React.Component {
   }
 }
 
-export const PriceConsumer = PriceContext.Consumer;
+const PriceConsumer = PriceContext.Consumer;
+
+export {
+  PriceProvider,
+  PriceConsumer
+};
