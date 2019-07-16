@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BasketProvider } from './BasketContext';
-import TotalPriceConsumer from './TotalPriceConsumer';
+import BasketPriceConsumer from './BasketPriceConsumer/BasketPriceConsumer';
 import BasketExtrasConsumer from './BasketExtrasConsumer';
 
 class App extends Component {
@@ -28,7 +28,7 @@ class App extends Component {
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <BasketExtrasConsumer />
-                <TotalPriceConsumer />
+                <BasketPriceConsumer />
             </header>
         </div>
       </BasketProvider>

@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Extras from '../Extras';
-import { BasketConsumer } from '../BasketContext';
+import BasketContext from '../BasketContext';
 
 const BasketExtrasConsumer = () => {
-    return (
-        <BasketConsumer>
-            {({ addExtra }) => (
-                <Extras addExtra={addExtra} />
-            )}
-        </BasketConsumer>
-    );
+    const { addExtra } = useContext(BasketContext);
+    return (<Extras addExtra={addExtra} />);
 };
 
 export default BasketExtrasConsumer;

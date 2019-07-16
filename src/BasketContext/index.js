@@ -56,3 +56,4 @@ export {
   BasketProvider,
   BasketConsumer
 };
+export default BasketContext;
