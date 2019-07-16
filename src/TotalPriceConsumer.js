@@ -1,23 +1,15 @@
 import React from 'react';
-import { PriceConsumer } from './PriceContext';
+import { BasketConsumer } from './BasketContext';
+import TotalPrice from './TotalPrice';
 
-const TotalPrice = () => {
+const TotalPriceConsumer = () => {
   return (
-    <PriceConsumer>
-      {({ car, setCar }) => (
-        <div>
-          <label htmlFor="username">Price: {car.name}</label>
-          <input
-            id="username"
-            type="text"
-            onChange={event => {
-              setCar(event.target.value);
-            }}
-          />
-        </div>
+    <BasketConsumer>
+      {({ carPrice, currencyDisplay, fees, extras }) => (
+        <TotalPrice carPrice={carPrice} currencyDisplay={currencyDisplay} fees={fees} extras={extras} />        
       )}
-    </PriceConsumer>
+    </BasketConsumer>
   );
 };
 
-export default TotalPrice;
+export default TotalPriceConsumer;

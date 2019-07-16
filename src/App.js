@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import TotalPrice from './TotalPrice';
-import Extras from './Extras';
+import { BasketProvider } from './BasketContext';
+import TotalPriceConsumer from './TotalPriceConsumer';
+import BasketExtrasConsumer from './BasketExtrasConsumer';
 
 class App extends Component {
   constructor (props) {
@@ -14,46 +15,23 @@ class App extends Component {
         id: 1,
         amount: 15,
         quantity: 1
-      }],
-      extras: []
+      }]
     };
   }
 
-  addExtra = (id, amount, payNow) => {
-    const { extras } = this.state;
-    let updatedQuantity = false;
-    extras.forEach(extra => {
-      if (extra.id === id) {
-        updatedQuantity = true;
-        extra.quantity++;
-      }
-    });
-    if (!updatedQuantity) {
-      extras.push({
-        id,
-        amount,
-        quantity: 1,
-        payNow
-      });
-    }
-
-    this.setState(prevState => ({
-      ...prevState,
-      extras
-    }));
-  }
-
   render () {
-    const {carPrice, currencyDisplay, fees, extras} = this.state;
+    const {carPrice, currencyDisplay, fees} = this.state;
 
     return (
-      <div className="App">
-          <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <Extras callBack={this.addExtra} />
-              <TotalPrice carPrice={carPrice} currencyDisplay={currencyDisplay} fees={fees} extras={extras} />
-          </header>
-      </div>
+      <BasketProvider carPrice={carPrice} currencyDisplay={currencyDisplay} fees={fees}>
+        <div className="App">
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                <BasketExtrasConsumer />
+                <TotalPriceConsumer />
+            </header>
+        </div>
+      </BasketProvider>
     );
   } 
 }
