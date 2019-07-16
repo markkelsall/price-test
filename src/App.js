@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { PriceProvider } from './PriceContext';
+import { BasketProvider } from './BasketContext';
 import TotalPriceConsumer from './TotalPriceConsumer';
-import ExtrasConsumer from './ExtrasConsumer';
+import BasketExtrasConsumer from './BasketExtrasConsumer';
 
 class App extends Component {
   constructor (props) {
@@ -23,15 +23,15 @@ class App extends Component {
     const {carPrice, currencyDisplay, fees} = this.state;
 
     return (
-      <PriceProvider carPrice={carPrice} currencyDisplay={currencyDisplay} fees={fees}>
+      <BasketProvider carPrice={carPrice} currencyDisplay={currencyDisplay} fees={fees}>
         <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
-                <ExtrasConsumer />
+                <BasketExtrasConsumer />
                 <TotalPriceConsumer />
             </header>
         </div>
-      </PriceProvider>
+      </BasketProvider>
     );
   } 
 }

@@ -1,15 +1,15 @@
 import React from 'react';
 import Extras from '../Extras';
-import { PriceConsumer } from '../PriceContext';
+import { BasketConsumer } from '../BasketContext';
 
-const ExtrasConsumer = () => {
+const BasketExtrasConsumer = () => {
     return (
-        <PriceConsumer>
+        <BasketConsumer>
             {({ addExtra }) => (
                 <Extras addExtra={addExtra} />
             )}
-        </PriceConsumer>
+        </BasketConsumer>
     );
 };
 
-export default ExtrasConsumer;
+export default BasketExtrasConsumer;

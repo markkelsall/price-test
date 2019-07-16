@@ -1,10 +1,10 @@
 import React, { createContext } from 'react';
 
-const PriceContext = createContext({
+const BasketContext = createContext({
   addExtra: () => {}
 });
 
-class PriceProvider extends React.Component {
+class BasketProvider extends React.Component {
 
   constructor (props) {
     super(props);
@@ -13,7 +13,6 @@ class PriceProvider extends React.Component {
       carPrice: props.carPrice,
       currencyDisplay: props.currencyDisplay,
       fees: props.fees,
-      setCar: this.setCar,
       addExtra: this.addExtra,
     };
   }
@@ -44,16 +43,16 @@ class PriceProvider extends React.Component {
 
   render() {
     return (
-      <PriceContext.Provider value={this.state}>
+      <BasketContext.Provider value={this.state}>
         {this.props.children}
-      </PriceContext.Provider>
+      </BasketContext.Provider>
     );
   }
 }
 
-const PriceConsumer = PriceContext.Consumer;
+const BasketConsumer = BasketContext.Consumer;
 
 export {
-  PriceProvider,
-  PriceConsumer
+  BasketProvider,
+  BasketConsumer
 };

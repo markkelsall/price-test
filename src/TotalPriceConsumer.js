@@ -1,14 +1,14 @@
 import React from 'react';
-import { PriceConsumer } from './PriceContext';
+import { BasketConsumer } from './BasketContext';
 import TotalPrice from './TotalPrice';
 
 const TotalPriceConsumer = () => {
   return (
-    <PriceConsumer>
+    <BasketConsumer>
       {({ carPrice, currencyDisplay, fees, extras }) => (
         <TotalPrice carPrice={carPrice} currencyDisplay={currencyDisplay} fees={fees} extras={extras} />        
       )}
-    </PriceConsumer>
+    </BasketConsumer>
   );
 };
 
