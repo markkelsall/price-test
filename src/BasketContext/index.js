@@ -1,22 +1,12 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 const BasketContext = createContext();
+const BasketConsumer = BasketContext.Consumer;
 
-class BasketProvider extends React.Component {
+const BasketProvider = props => {
 
-  constructor (props) {
-    super(props);
-    this.state = {
-      extras: [],
-      carPrice: props.carPrice,
-      currencyDisplay: props.currencyDisplay,
-      fees: props.fees,
-      addExtra: this.addExtra,
-    };
-  }
-
-  addExtra = (id, amount, payNow) => {
-    const { extras } = this.state;
+  const addExtra = (id, amount, payNow) => {
+    const { extras } = basket;
     let updatedQuantity = false;
     extras.forEach(extra => {
       if (extra.id === id) {
@@ -33,25 +23,32 @@ class BasketProvider extends React.Component {
       });
     }
 
-    this.setState(prevState => ({
-      ...prevState,
+    setBasket({ 
+      ...basket,
       extras
-    }));
+    });
   }
 
-  render() {
-    return (
-      <BasketContext.Provider value={this.state}>
-        {this.props.children}
-      </BasketContext.Provider>
-    );
-  }
-}
+  const initialState = {
+    extras: [],
+    carPrice: props.carPrice,
+    currencyDisplay: props.currencyDisplay,
+    fees: props.fees,
+    addExtra,
+  };
 
-const BasketConsumer = BasketContext.Consumer;
+  const [basket, setBasket] = useState(initialState);
+
+  return (
+    <BasketContext.Provider value={basket}>
+      {props.children}
+    </BasketContext.Provider>
+  );
+};
 
 export {
-  BasketProvider,
-  BasketConsumer
+  BasketConsumer,
+  BasketProvider
 };
+
 export default BasketContext;
