@@ -1,8 +1,6 @@
 import React, { createContext } from 'react';
 
-const BasketContext = createContext({
-  addExtra: () => {}
-});
+const BasketContext = createContext();
 
 class BasketProvider extends React.Component {
 
